@@ -2,8 +2,13 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "type": "module",
   "scripts": {
+    "start": "node .",
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "typecheck": "tsc"
   },
   "repository": {
     "type": "git",
@@ -14,5 +19,10 @@
   "bugs": {
     "url": "https://github.com/TrimNCut/EasyTutor/issues"
   },
-  "homepage": "https://github.com/TrimNCut/EasyTutor#readme"
+  "homepage": "https://github.com/TrimNCut/EasyTutor#readme",
+  "devDependencies": {
+    "@types/node": "^20.12.13",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5"
+  }
 }
