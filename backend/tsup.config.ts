@@ -9,5 +9,5 @@ export default defineConfig({
   minify: !isDev,
   target: 'esnext',
   outDir: 'dist',
-  onSuccess: isDev ? 'node .' : undefined,
+  onSuccess: isDev ? 'node -r dotenv/config . dotenv_config_path=env/local.env' : undefined,
 });

@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "start": "node .",
+    "start": "node -r dotenv/config . dotenv_config_path=env/local.env",
     "dev": "tsup --watch",
     "build": "tsup",
     "typecheck": "tsc"
@@ -18,8 +18,13 @@
   "author": "TrimNCut <daviestise@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/node": "^20.12.13",
     "tsup": "^8.0.2",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
   }
 }
