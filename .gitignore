@@ -12,3 +12,6 @@ dist/
 
 # !OTHERS
 .vscode/
+
+# !ENV
+.env.local
