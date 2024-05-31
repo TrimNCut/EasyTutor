@@ -1,2 +1,14 @@
-*/node_modules/*
-*/dist/*
+### !GIT IGNORE FILE ###
+
+# !DEPENDENCIES
+node_modules/
+package-lock.json
+
+# !CACHE
+.turbo/
+
+# !BUILD
+dist/
+
+# !OTHERS
+.vscode/

@@ -1,0 +1,33 @@
+{
+  "name": "@easy-tutor/root",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "turbo start",
+    "start:backend": "turbo --filter=backend start",
+    "start:frontend": "turbo --filter=frontend start",
+    "dev": "turbo dev",
+    "dev:backend": "turbo --filter=backend dev",
+    "build": "turbo build",
+    "build:backend": "turbo --filter=backend build",
+    "build:frontend":"turbo --filter=frontend build",
+    "typecheck": "turbo typecheck"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TrimNCut/EasyTutor.git"
+  },
+  "workspaces":["backend","frontend"],
+  "keywords": [
+    "Tutor",
+    "Easy",
+    "tutor",
+    "tutorial"
+  ],
+  "author": "TrimNCut <daviestise@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "turbo": "^1.13.3"
+  }
+}

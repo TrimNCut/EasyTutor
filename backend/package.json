@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "@easy-tutor/backend",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -12,14 +12,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/TrimNCut/EasyTutor.git"
+    "url": "https://github.com/TrimNCut/EasyTutor.git",
+    "directory": "backend"
   },
   "author": "TrimNCut <daviestise@gmail.com>",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/TrimNCut/EasyTutor/issues"
-  },
-  "homepage": "https://github.com/TrimNCut/EasyTutor#readme",
   "devDependencies": {
     "@types/node": "^20.12.13",
     "tsup": "^8.0.2",
