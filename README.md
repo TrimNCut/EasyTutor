@@ -19,7 +19,7 @@ When contributing to `Easy Tutor`, whether on GitHub or in other community space
 
 ### Prerequisites
 
-In order to not waste your time implementing a change that has already been declined, or is generally not needed, start by [opening an issue](https://github.com/t3-oss/create-t3-app/issues/new/choose) describing the problem you would like to solve.
+In order to not waste your time implementing a change that has already been declined, or is generally not needed, start by [opening an issue](https://github.com/TrimNCut/EasyTutor/issues/new/choose) describing the problem you would like to solve.
 
 ### Setup your environment locally
 - First you will need to create a fork of the repository.
