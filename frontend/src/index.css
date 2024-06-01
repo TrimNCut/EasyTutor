@@ -48,6 +48,11 @@ nav h1 a{
   padding: 2vw;
 }
 
+.navlogo{
+  width: 7vw;
+  height: 7vw;
+}
+
 nav a{
   font-size: 1.25vw;
   color: var(--dark-grey);
