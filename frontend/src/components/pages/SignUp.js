@@ -1,5 +1,3 @@
-import UserWhite from '../../images/user-solid.svg'
-
 export default function SignUp(){
     return(
         <div className="authcon">
