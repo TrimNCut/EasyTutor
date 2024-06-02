@@ -39,6 +39,7 @@ In order to not waste your time implementing a change that has already been decl
   ```bash
   cd backend
   cp -i ./env/.env.example ./env/.env.local
+  cd ..
   ```
 
 ### Implement your changes
