@@ -1,32 +1,41 @@
 {
-  "name": "@easy-tutor/root",
+  "name": "@usi-tutors/root",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "turbo start",
-    "start:backend": "turbo --filter=backend start",
     "start:frontend": "turbo --filter=frontend start",
+    "start:backend": "turbo --filter=backend start",
+    "dev": "turbo dev",
+    "dev:frontend": "turbo --filter=frontend dev",
     "dev:backend": "turbo --filter=backend dev",
     "build": "turbo build",
+    "build:frontend": "turbo --filter=frontend build",
     "build:backend": "turbo --filter=backend build",
-    "build:frontend":"turbo --filter=frontend build",
-    "typecheck": "turbo typecheck"
+    "lint": "turbo typecheck && biome lint --apply-unsafe --files-ignore-unknown=true --no-errors-on-unmatched .",
+    "format": "biome check --apply-unsafe --linter-enabled=false --files-ignore-unknown=true --no-errors-on-unmatched .",
+    "clean": "turbo clean && rm -rf node_modules",
+    "prepare": "husky"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">=18.15.0",
+    "pnpm": ">=9.1.4",
+    "npm": "please use pnpm",
+    "yarn": "please use pnpm",
+    "bun": "please use pnpm"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/TrimNCut/EasyTutor.git"
+    "url": "https://github.com/TrimNCut/USITutors.git"
   },
-  "workspaces":["backend","frontend"],
-  "keywords": [
-    "Tutor",
-    "Easy",
-    "tutor",
-    "tutorial"
-  ],
+  "keywords": ["Tutor", "Easy", "tutor", "tutorial"],
   "author": "TrimNCut <daviestise@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@biomejs/biome": "^1.7.3",
+    "husky": "^9.0.11",
     "turbo": "^1.13.3"
   }
 }

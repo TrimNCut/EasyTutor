@@ -2,10 +2,11 @@
 
 # !DEPENDENCIES
 node_modules/
-package-lock.json
+pnpm-lock.yaml
 
 # !CACHE
 .turbo/
+vite.config.ts.timestamp*
 
 # !BUILD
 dist/

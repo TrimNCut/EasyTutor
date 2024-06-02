@@ -1,11 +1,12 @@
-import server from "~/server.js";
+import env from './config/env';
+import server from './server';
 
-const port = process.env.PORT||5000;
+const port = env.port;
 
-function startServer(){
-  server.listen(port,function(){
-    console.log(`Server running on port ${port}`)
-  })
+function startServer() {
+  server.listen(port, () => {
+    console.log(`Server running on port http://localhost:${port}`);
+  });
 }
 
-startServer()
+startServer();

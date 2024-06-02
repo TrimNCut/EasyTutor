@@ -1,0 +1,93 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.7.0/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "formatter": {
+    "ignore": [".vscode/*"],
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120,
+    "lineEnding": "lf",
+    "attributePosition": "auto",
+    "formatWithErrors": false
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingComma": "es5",
+      "jsxQuoteStyle": "single",
+      "bracketSameLine": false,
+      "bracketSpacing": false,
+      "arrowParentheses": "always",
+      "quoteProperties": "asNeeded",
+      "semicolons": "always",
+      "attributePosition": "auto"
+    }
+  },
+  "json": {
+    "formatter": {
+      "enabled": true,
+      "indentWidth": 2,
+      "indentStyle": "space",
+      "lineEnding": "lf",
+      "trailingCommas": "none"
+    }
+  },
+  "css": {
+    "formatter": {
+      "enabled": true,
+      "indentWidth": 2,
+      "indentStyle": "space",
+      "lineEnding": "lf",
+      "quoteStyle": "single"
+    }
+  },
+  "linter": {
+    "ignore": [".vscode/*", "dist/*", "templates/*"],
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": {
+        "all": true,
+        "useKeyWithClickEvents": "off"
+      },
+      "complexity": {
+        "all": true,
+        "noExcessiveCognitiveComplexity": "off"
+      },
+      "correctness": {
+        "all": true
+      },
+      "performance": {
+        "noBarrelFile": "error",
+        "noAccumulatingSpread": "error",
+        "noDelete": "error",
+        "noReExportAll": "error"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "error",
+        "noDangerouslySetInnerHtmlWithChildren": "error",
+        "noGlobalEval": "error"
+      },
+      "style": {
+        "all": true,
+        "useNamingConvention": {
+          "level": "error",
+          "options": {
+            "requireAscii": true,
+            "strictCase": false
+          }
+        },
+        "noDefaultExport": "off",
+        "useFragmentSyntax": "off",
+        "noNonNullAssertion": "off"
+      },
+      "suspicious": {
+        "all": true,
+        "noArrayIndexKey": "off",
+        "noConsoleLog": "off"
+      }
+    }
+  }
+}
