@@ -1,9 +1,9 @@
-*{
+* {
   margin: 0;
   padding: 0;
 }
 
-:root{
+:root {
   --black: #292929;
   --white: #ffffff;
   --light-grey: #ededed;
@@ -14,14 +14,14 @@
   --secondary-darker: #3c5cda;
   --accept: #4aff7a;
   --decline: #ff4a4a;
-  --orange: 	#ff9700;
-  --yellow: 	#ffd500;
+  --orange: #ff9700;
+  --yellow: #ffd500;
   --soft-shadow: 0vw 0vw 3vw 1vw var(--light-grey);
   --soft-bottom-shadow: 0vw 1vw 2vw -1vw var(--light-grey);
 }
 
-body{
-  font-family: 'Poppins', sans-serif;
+body {
+  font-family: "Poppins", sans-serif;
 }
 
 /*
@@ -41,12 +41,12 @@ nav{
 }
 */
 
-nav{
+nav {
   width: 100vw;
   min-height: 8vw;
   height: auto;
   background-color: var(--white);
-  box-shadow: var(--soft-shadow); 
+  box-shadow: var(--soft-shadow);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,7 +57,7 @@ nav{
   position: sticky;
 }
 
-nav h1 a{
+nav h1 a {
   font-size: 2.25vw;
   background-image: linear-gradient(180deg, var(--yellow), var(--orange));
   background-clip: text;
@@ -67,12 +67,12 @@ nav h1 a{
   font-weight: 700;
 }
 
-.navlogo{
+.navlogo {
   width: 7vw;
   height: 7vw;
 }
 
-nav a{
+nav a {
   font-size: 1.1vw;
   color: var(--dark-grey);
   text-decoration: none;
@@ -84,11 +84,11 @@ nav a{
   transition: all ease 0.4s;
 }
 
-nav a:hover{
+nav a:hover {
   color: var(--secondary);
 }
 
-.dropdowndetails{
+.dropdowndetails {
   width: 100vw;
   height: auto;
   display: none;
@@ -104,31 +104,31 @@ nav a:hover{
   position: absolute;
 }
 
-.dropdowndetailsactive{
+.dropdowndetailsactive {
   opacity: 1;
   display: grid;
 }
 
 .dropdowndetails h1,
-.dropdowndetails p{
+.dropdowndetails p {
   text-align: center;
 }
 
-.dropdowndetails h1{
+.dropdowndetails h1 {
   color: var(--secondary);
   font-weight: 800;
   font-size: 1.7vw;
   padding: 1vw;
 }
 
-.dropdowndetails p{
+.dropdowndetails p {
   color: var(--dark-grey);
   font-weight: 600;
   font-size: 1.2vw;
   padding: 0.3vw;
 }
 
-.dropdowndetails hr{
+.dropdowndetails hr {
   width: 4vw;
   height: 0.2vw;
   background-color: var(--grey);
@@ -138,14 +138,14 @@ nav a:hover{
   margin-right: auto;
   margin-top: 1vw;
   margin-bottom: 1vw;
-} 
+}
 
-nav a img{
+nav a img {
   width: 1.15vw;
   margin-left: 0.75vw;
 }
 
-nav hr{
+nav hr {
   width: 0.15vw;
   height: 4vw;
   background-color: var(--grey);
@@ -153,7 +153,7 @@ nav hr{
   border-radius: 0.1vw;
 }
 
-.outlineBtn{
+.outlineBtn {
   width: 8vw;
   height: 2.8vw;
   border-radius: 0.6vw;
@@ -166,13 +166,13 @@ nav hr{
   transition: all ease 0.7s;
 }
 
-.outlineBtn:hover{
+.outlineBtn:hover {
   background-color: var(--orange);
   color: var(--white);
   font-size: 1.1vw;
 }
 
-.fullBtn{
+.fullBtn {
   width: 8vw;
   height: 2.8vw;
   border-radius: 0.6vw;
@@ -185,13 +185,13 @@ nav hr{
   transition: all ease 0.5s;
 }
 
-.fullBtn:hover{
+.fullBtn:hover {
   background-color: var(--secondary-darker);
   border: 0.125vw solid var(--secondary-darker);
   font-size: 1.1vw;
 }
 
-.authcon{
+.authcon {
   width: 50vw;
   height: 30vw;
   margin-top: 6vw;
@@ -204,10 +204,11 @@ nav hr{
   justify-content: center;
 }
 
-.authconleft{
+.authconleft {
+  background-color: var(--light-grey);
   width: 50%;
   border-radius: 3vw;
 }
-.authconright{
+.authconright {
   width: 50%;
 }

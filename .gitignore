@@ -2,10 +2,10 @@
 
 # !DEPENDENCIES
 node_modules/
-package-lock.json
 
 # !CACHE
 .turbo/
+vite.config.ts.timestamp*
 
 # !BUILD
 dist/

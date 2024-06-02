@@ -1,38 +1,25 @@
 {
   "compilerOptions": {
-    // !Language compiler options
-    "baseUrl": "./",
-    "target": "ES2022",
-    "module": "Node16",
-    "moduleResolution": "NodeNext",
-    "resolveJsonModule": true,
-    "allowJs": true,
-    "checkJs": true,
+    // !Compiler options
+    "target": "ES2020",
+    "module": "CommonJS",
+    "rootDir": "./src",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "removeComments": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
     "paths": {
       "~/*": ["./src/*"]
     },
-
-    // !Emit Rules
-    "outDir": "./dist",
-    "noEmit": true, // !TSUP takes care of emitting js for us, in a MUCH faster way
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "removeComments": true,
-
+    // !Rules
     "strict": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "useUnknownInCatchVariables": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
-
-    // !Other options
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "noImplicitOverride": true
   }
 }
