@@ -10,7 +10,7 @@ export default function Navbar() {
       <nav>
         <h1>
           <Link to='/'>
-            <img className='navlogo' src="/logo2.png" alt='Logo' />
+            <img className='navlogo' src='/logo.png' alt='Logo' />
             USI Tutors
           </Link>
         </h1>
@@ -25,7 +25,7 @@ export default function Navbar() {
           }}
         >
           Find a Tutor
-          <img alt='arrow-down' src="/caret-down.svg" />
+          <img alt='arrow-down' src='/caret-down-solid.svg' />
         </Link>
         <button
           type='button'

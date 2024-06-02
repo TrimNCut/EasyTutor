@@ -9,10 +9,12 @@
   --light-grey: #ededed;
   --grey: #cdcdcd;
   --dark-grey: #494949;
+  --dark-grey-half: #49494976;
   --primary: #aa61e2;
   --secondary: #456aff;
   --secondary-darker: #3c5cda;
   --accept: #4aff7a;
+  --dark-accept: #48f376;
   --decline: #ff4a4a;
   --orange: #ff9700;
   --yellow: #ffd500;
@@ -205,10 +207,123 @@ nav hr {
 }
 
 .authconleft {
-  background-color: var(--light-grey);
-  width: 50%;
+  width: 25;
   border-radius: 3vw;
+  background-color: var(--dark-grey);
 }
+
+.authconleft img{
+  width: 25vw;
+  height: 30vw;
+  border-radius: 3vw;
+  opacity: 0.75;
+}
+
 .authconright {
-  width: 50%;
+  width: 25vw;
+  text-align: center;
+}
+
+.authconright h1{
+  padding-top: 2vw;
+  color: var(--dark-grey);
+}
+
+.authconright hr{
+  width: 7vw;
+  height: 0.2vw;
+  border-radius: 1vw;
+  background-color: var(--grey);
+  border: none;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.3vw;
+}
+
+.authconright p{
+  padding-top: 1vw;
+  font-size: 1vw;
+}
+
+.authcondiv{
+  width: 25vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3vw;
+  margin-top: 1vw;
+  gap: 2vw
+}
+
+.authcondiv input{
+  width: 12.5vw;
+  height: 2.5vw;
+  margin-top: 1vw;
+  padding-left: 1vw;
+  border-radius: 0.6vw;
+  border: 0.11vw solid var(--dark-grey-half);
+  outline: none;
+  font-size: 0.8vw;
+  font-weight: 500;
+  color: var(--dark-grey);
+  transition: all ease 0.4s;
+}
+
+.authcondiv::placeholder{
+  color: var(--dark-grey-half);
+}
+
+.authcondiv input:hover{
+  width: 14vw;
+  border: 0.11vw solid var(--dark-grey-half);
+}
+
+.authconoptions{
+  width: 4vw;
+  height: 3.5vw;
+  margin-top: 1vw;
+  border-radius: 0.6vw; 
+  cursor: pointer;
+  transition: all ease 0.4s;
+}
+
+.authconoptions img{
+  width: 1.5vw;
+  height: 1.5vw;
+}
+
+.authconoptions:hover{
+  margin-top: -0.75vw;
+}
+
+.authparents{
+  background-color: var(--secondary);
+  border: solid var(--secondary);
+  color: var(--white);
+  font-size: 1vw;
+}
+
+.authteachers{
+  background-color: var(--primary);
+  border: solid var(--primary); 
+  color: var(--white);
+  font-size: 1vw;
+}
+
+.authconsubmit{
+  width: 18vw;
+  height: 3vw;
+  margin-top: 2vw;
+  border-radius: 1vw;
+  border: none;
+  background-color: var(--accept);
+  font-size: 1.15vw;
+  color: var(--white);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all ease 0.4s;
+}
+
+.authconsubmit:hover{
+  background-color: var(--dark-accept);
 }
