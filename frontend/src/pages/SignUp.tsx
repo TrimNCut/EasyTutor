@@ -2,13 +2,13 @@ export default function SignUp() {
   return (
     <div className='authcon'>
       <div className='authconleft'>
-        <img src='/teacherandchild.jpeg' />
+        <img src='/teacherandchild.jpeg' alt='teacherandchild' />
       </div>
       <div className='authconright'>
         <h1>Sign Up Today!</h1>
         <hr />
         <div className='authcondiv'>
-          <img src='/envelope-solid.svg' />
+          <img src='/envelope-solid.svg' alt='envelope' />
           <input type='email' placeholder='Your Mail' />
         </div>
         <div className='authcondiv'>
@@ -19,13 +19,15 @@ export default function SignUp() {
         </div>
         <p>Register as:</p>
         <div className='authcondiv'>
-          <button className='authconoptions authparents'>
+          <button className='authconoptions authparents' type='button'>
             <img src='/user-solid.svg' alt='For Parents' />
           </button>
-          <button className='authconoptions authteachers' />
+          <button className='authconoptions authteachers' type='button' />
         </div>
         <div className='authcondiv'>
-          <button className='authconsubmit'>Sign Up</button>
+          <button className='authconsubmit' type='submit'>
+            Sign Up
+          </button>
         </div>
       </div>
     </div>
