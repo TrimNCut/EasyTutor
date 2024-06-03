@@ -1,48 +1,27 @@
-import validate from 'deep-email-validator';
-import type {SignUpFormData} from './types';
+import {prisma} from '../../config/db';
+import {hashData} from '../../utils/hashData';
 
-type ValidateResult =
-  | {
-      data: {
-        username: string;
-        passwordOne: string;
-        passwordTwo: string;
-        email: string;
-      };
-      success: true;
-    }
-  | {
-      error: string;
-      success: false;
-    };
+export async function createNewUser(data: {username: string; email: string; password: string}) {
+  const {username, email, password} = data;
 
-export async function validateSignUpFormData(signUpFormData: SignUpFormData): Promise<ValidateResult> {
-  const users = [
-    {
-      username: 'User 1',
-      password: 'U53R_1',
-      email: 'user1@users.com',
+  const existingUser = await prisma.user.findFirst({
+    where: {
+      OR: [{email: email}, {username: username}],
     },
-  ];
+  });
 
-  if (!(await validate(signUpFormData.email)).valid) {
-    return {
-      error: 'Email is not valid',
-      success: false,
-    };
+  if (existingUser) {
+    if (existingUser.email === email) {
+      throw Error('User with the provided email exists');
+    }
+    if (existingUser.username === username) {
+      throw Error('User with the provided username exists');
+    }
   }
 
-  if (users.find((user) => signUpFormData.username.toLowerCase() === user.username.toLowerCase())) {
-    return {error: 'User name already exists', success: false};
-  }
+  const hashedPassword = await hashData(password);
 
-  if (users.find((user) => signUpFormData.email.toLowerCase() === user.email.toLowerCase())) {
-    return {error: 'Email name already exists', success: false};
-  }
+  const createdUser = await prisma.user.create({data: {username: username, password: hashedPassword, email: email}});
 
-  if (signUpFormData.passwordOne !== signUpFormData.passwordTwo) {
-    return {error: 'First and second password do not match', success: false};
-  }
-
-  return {data: signUpFormData, success: true};
+  return createdUser;
 }

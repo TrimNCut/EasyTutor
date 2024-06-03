@@ -72,13 +72,7 @@
       },
       "style": {
         "all": true,
-        "useNamingConvention": {
-          "level": "error",
-          "options": {
-            "requireAscii": true,
-            "strictCase": false
-          }
-        },
+        "useNamingConvention": "off",
         "noDefaultExport": "off",
         "useFragmentSyntax": "off",
         "noNonNullAssertion": "off"

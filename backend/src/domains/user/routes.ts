@@ -1,25 +1,45 @@
 import express, {type Request, type Response} from 'express';
-import {fromZodError} from 'zod-validation-error';
-import {validateSignUpFormData} from './contoller';
-import {signUpFormDataSchema} from './types';
+import {z} from 'zod';
+import {createNewUser} from './contoller';
 
 const router = express.Router();
 
 router.post('/signup', async (request: Request, response: Response) => {
-  const body = signUpFormDataSchema.safeParse(request.body);
+  try {
+    let {username, email, password, secondPassword} = request.body;
+    username = username.trim();
+    email = email.trim();
+    password = password.trim();
 
-  if (!body.success) {
-    return response.json({error: String(fromZodError(body.error)), success: false});
+    if (!(username && email && password)) {
+      throw Error('Empty input fields!');
+    }
+    if (!/^[a-zA-Z ]*$/.test(username)) {
+      throw Error('Invalid username entered');
+    }
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      throw Error('Invalid email entered');
+    }
+    if (password.length < 8) {
+      throw Error('Password is too short!');
+    }
+    if (password !== secondPassword) {
+      throw Error('Passwords do not match!');
+    }
+    const newUser = await createNewUser({username: username, password: password, email: email});
+
+    return response.status(200).json(newUser);
+  } catch (error) {
+    const errorSchema = z.object({message: z.string()});
+
+    const results = errorSchema.safeParse(error);
+
+    if (results.data && results.success) {
+      return response.status(400).send(results.data.message);
+    }
+
+    return response.send(String(error));
   }
-
-  const signUpFormData = body.data;
-  const validateResult = await validateSignUpFormData(signUpFormData!);
-
-  if (!validateResult.success) {
-    return response.send({error: validateResult.error, success: false});
-  }
-
-  return response.json({data: validateResult.data, success: true});
 });
 
 router.post('/login', async () => {
