@@ -1,48 +1,30 @@
-import validate from 'deep-email-validator';
-import type {SignUpFormData} from './types';
+import {prisma} from '../../config/db';
+import {hashData} from '../../utils/hashData';
 
-type ValidateResult =
-  | {
-      data: {
-        username: string;
-        passwordOne: string;
-        passwordTwo: string;
-        email: string;
-      };
-      success: true;
+export async function createNewUser(data: {username: string; email: string; password: string}) {
+  try {
+    const {username, email, password} = data;
+
+    const existingUser = await prisma.user.findFirst({
+      where: {
+        OR: [{email: email}, {username: username}],
+      },
+    });
+
+    if (existingUser) {
+      if (existingUser.email === email) {
+        throw Error('User with the provided email exists');
+      } else if (existingUser.username === username) {
+        throw Error('User with the provided username exists');
+      }
     }
-  | {
-      error: string;
-      success: false;
-    };
 
-export async function validateSignUpFormData(signUpFormData: SignUpFormData): Promise<ValidateResult> {
-  const users = [
-    {
-      username: 'User 1',
-      password: 'U53R_1',
-      email: 'user1@users.com',
-    },
-  ];
+    const hashedPassword = await hashData(password);
 
-  if (!(await validate(signUpFormData.email)).valid) {
-    return {
-      error: 'Email is not valid',
-      success: false,
-    };
+    const createdUser = await prisma.user.create({data: {username: username, password: hashedPassword, email: email}});
+
+    return createdUser;
+  } catch (error) {
+    throw error;
   }
-
-  if (users.find((user) => signUpFormData.username.toLowerCase() === user.username.toLowerCase())) {
-    return {error: 'User name already exists', success: false};
-  }
-
-  if (users.find((user) => signUpFormData.email.toLowerCase() === user.email.toLowerCase())) {
-    return {error: 'Email name already exists', success: false};
-  }
-
-  if (signUpFormData.passwordOne !== signUpFormData.passwordTwo) {
-    return {error: 'First and second password do not match', success: false};
-  }
-
-  return {data: signUpFormData, success: true};
 }
