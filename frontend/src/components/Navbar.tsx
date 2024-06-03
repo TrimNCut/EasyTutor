@@ -37,7 +37,13 @@ export default function Navbar() {
           SignUp
         </button>
         <hr />
-        <button type='button' className='fullBtn'>
+        <button
+          type='button'
+          className='fullBtn'
+          onClick={() => {
+            navigate('/login');
+          }}
+        >
           Login
         </button>
       </nav>
