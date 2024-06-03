@@ -22,7 +22,7 @@ export default function SignUp() {
           <button className='authconoptions authparents'>
             <img src='/user-solid.svg' alt='For Parents' />
           </button>
-          <button className='authconoptions authteachers'></button>
+          <button className='authconoptions authteachers' />
         </div>
         <div className='authcondiv'>
           <button className='authconsubmit'>Sign Up</button>
