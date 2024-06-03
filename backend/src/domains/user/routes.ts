@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/signup', async (request: Request, response: Response) => {
   try {
-    let {username, email, password} = request.body;
+    let {username, email, password, secondPassword} = request.body;
     username = username.trim();
     email = email.trim();
     password = password.trim();
@@ -22,6 +22,9 @@ router.post('/signup', async (request: Request, response: Response) => {
     }
     if (password.length < 8) {
       throw Error('Password is too short!');
+    }
+    if (password !== secondPassword) {
+      throw Error('Passwords do not match!');
     }
     const newUser = await createNewUser({username: username, password: password, email: email});
 
