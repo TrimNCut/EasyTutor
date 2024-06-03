@@ -13,17 +13,19 @@ router.post('/signup', async (request: Request, response: Response) => {
 
     if (!(username && email && password)) {
       throw Error('Empty input fields!');
-    } else if (!/^[a-zA-Z ]*$/.test(username)) {
-      throw Error('Invalid username entered');
-    } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-      throw Error('Invalid email entered');
-    } else if (password.length < 8) {
-      throw Error('Password is too short!');
-    } else {
-      const newUser = await createNewUser({username: username, password: password, email: email});
-
-      return response.status(200).json(newUser);
     }
+    if (!/^[a-zA-Z ]*$/.test(username)) {
+      throw Error('Invalid username entered');
+    }
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      throw Error('Invalid email entered');
+    }
+    if (password.length < 8) {
+      throw Error('Password is too short!');
+    }
+    const newUser = await createNewUser({username: username, password: password, email: email});
+
+    return response.status(200).json(newUser);
   } catch (error) {
     const errorSchema = z.object({message: z.string()});
 
