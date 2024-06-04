@@ -16,7 +16,7 @@ export default function Login() {
           <input type='text' placeholder='Password' />
         </div>
         <div className='authcondiv'>
-          <button className='authconloginsubmit' type='submit'>
+          <button className='authconsubmit' type='submit'>
             Login
           </button>
         </div>

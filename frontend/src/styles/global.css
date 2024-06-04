@@ -123,6 +123,10 @@ nav a:hover {
   text-align: center;
 }
 
+.dropdowndetails p{
+  cursor: pointer;
+}
+
 .dropdowndetails h1 {
   color: var(--secondary);
   font-weight: 800;
@@ -134,7 +138,13 @@ nav a:hover {
   color: var(--dark-grey);
   font-weight: 600;
   font-size: 1.2vw;
-  padding: 0.3vw;
+  padding: 0vw;
+  margin: 0.75vw;
+  transition: all ease 0.2s;
+}
+
+.dropdowndetails p:hover{
+  color: var(--dark-grey-half);
 }
 
 .dropdowndetails hr {
@@ -197,7 +207,6 @@ nav hr {
 .fullBtn:hover {
   background-color: var(--secondary-darker);
   border: 0.125vw solid var(--secondary-darker);
-  font-size: 1.1vw;
 }
 
 /*SignUp and Login Page*/
@@ -216,7 +225,7 @@ nav hr {
 }
 
 .authconlogin {
-  width: 50vw;
+  width: 45vw;
   height: 25vw;
   margin-top: 5vw;
   background-color: var(--white);
@@ -229,24 +238,31 @@ nav hr {
 }
 
 .authconleft {
-  width: 25vw;
+  width: 50%;
   border-radius: 3vw;
 }
 
 .authconleft img{
-  width: 25vw;
+  width: 100%;
   height: 100%;
   border-radius: 3vw;
 }
 
 .authconright {
-  width: 25vw;
+  width: 50%;
   text-align: center;
 }
 
 .authconright h1{
   padding-top: 2vw;
   color: var(--dark-grey);
+  font-size: 1.8vw;
+}
+
+.authconloginright h1{
+  padding-top: 4vw;
+  color: var(--dark-grey);
+  font-size: 1.75vw;
 }
 
 .authconloginright h1{
@@ -271,7 +287,7 @@ nav hr {
 }
 
 .authcondiv{
-  width: 25vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -287,7 +303,7 @@ nav hr {
   border-radius: 0.6vw;
   border: 0.11vw solid var(--dark-grey-half);
   outline: none;
-  font-size: 0.8vw;
+  font-size: 0.85vw;
   font-weight: 500;
   color: var(--dark-grey);
   transition: all ease 0.4s;
@@ -354,24 +370,6 @@ nav hr {
   margin-top: 2vw;
   border-radius: 1vw;
   border: none;
-  background-color: var(--accept);
-  font-size: 1.15vw;
-  color: var(--white);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all ease 0.4s;
-}
-
-.authconsubmit:hover{
-  background-color: var(--dark-accept);
-}
-
-.authconloginsubmit{
-  width: 18vw;
-  height: 3vw;
-  margin-top: 2vw;
-  border-radius: 1vw;
-  border: none;
   background-color: var(--secondary);
   font-size: 1.15vw;
   color: var(--white);
@@ -380,6 +378,11 @@ nav hr {
   transition: all ease 0.4s;
 }
 
-.authconloginsubmit:hover{
+.authconsubmit:hover{
   background-color: var(--secondary-darker);
+}
+
+.authconerror{
+  margin-top: 0.3vw;
+  color: var(--decline);
 }
