@@ -1,7 +1,7 @@
 import env from './config/env';
 import server from './server';
 
-const port = env.port;
+const port = env.PORT;
 
 function startServer() {
   server.listen(port, () => {

@@ -1,12 +1,13 @@
 import {prisma} from '../../config/db';
-import {hashData} from '../../utils/hashData';
+import {createToken} from '../../utils/createToken';
+import {hashData, verifyHashedData} from '../../utils/hashData';
 
-export async function createNewUser(data: {username: string; email: string; password: string}) {
-  const {username, email, password} = data;
+export async function createNewUser(data: {username: string; email: string; password: string; accountType: string}) {
+  const {username, email, password, accountType} = data;
 
   const existingUser = await prisma.user.findFirst({
     where: {
-      OR: [{email: email}, {username: username}],
+      OR: [{email}, {username}],
     },
   });
 
@@ -21,7 +22,33 @@ export async function createNewUser(data: {username: string; email: string; pass
 
   const hashedPassword = await hashData(password);
 
-  const createdUser = await prisma.user.create({data: {username: username, password: hashedPassword, email: email}});
+  const createdUser = await prisma.user.create({data: {username, password: hashedPassword, email, accountType}});
 
   return createdUser;
+}
+
+export async function authenticateUser(data: {email: string; password: string}) {
+  const {email, password} = data;
+
+  let fetchedUser = await prisma.user.findFirst({where: {email}});
+
+  if (!fetchedUser) {
+    throw Error('Invalid credentials entered!');
+  }
+
+  const hashedPassword = fetchedUser.password;
+
+  const passwordMatch = await verifyHashedData(password, hashedPassword);
+
+  if (!passwordMatch) {
+    throw Error('Invalid password entered!');
+  }
+
+  const tokenData = {userId: fetchedUser.id, email};
+
+  const token = createToken(tokenData);
+
+  fetchedUser = await prisma.user.update({where: {id: tokenData.userId}, data: {token: token}});
+
+  return fetchedUser;
 }
