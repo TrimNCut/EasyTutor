@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prepare": "prisma generate",
     "start": "node -r dotenv/config ./dist/index.js dotenv_config_path=env/.env.local",
     "dev": "nodemon -r dotenv/config ./src/index.ts dotenv_config_path=env/.env.local",
     "build": "tsc",
