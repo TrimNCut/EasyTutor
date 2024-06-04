@@ -1,7 +1,12 @@
 import {z} from 'zod';
 import {fromZodError} from 'zod-validation-error';
 
-const envSchema = z.object({port: z.string(), database_url: z.string()});
+const envSchema = z.object({
+  PORT: z.string(),
+  DATABASE_URL: z.string(),
+  TOKEN_KEY: z.string(),
+  TOKEN_EXPIRY: z.string(),
+});
 
 type Env = z.infer<typeof envSchema>;
 function parseEnv(): Env {
@@ -13,8 +18,10 @@ function parseEnv(): Env {
 
   console.log(fromZodError(env.error).message);
   return {
-    port: '3001',
-    database_url: 'mongodb+srv://test:test@cluster0.ns1yp.mongodb.net/myFirstDatabase',
+    PORT: '3001',
+    DATABASE_URL: 'mongodb+srv://test:test@cluster0.ns1yp.mongodb.net/myFirstDatabase',
+    TOKEN_KEY: 'jaoijdoiklandkofnvaodoifoksidnsimfidinjfijdij',
+    TOKEN_EXPIRY: '60d',
   };
 }
 
