@@ -182,13 +182,12 @@ nav hr {
   font-weight: 400;
   color: var(--orange);
   cursor: pointer;
-  transition: all ease 0.7s;
+  transition: all ease 0.6s;
 }
 
 .outlineBtn:hover {
   background-color: var(--orange);
   color: var(--white);
-  font-size: 1.1vw;
 }
 
 .fullBtn {
@@ -385,4 +384,136 @@ nav hr {
 .authconerror{
   margin-top: 0.3vw;
   color: var(--decline);
+}
+
+/*RESPONSIVE DESIGN*/
+/*For Laptops*/
+
+@media screen and (max-width: 1024px){
+  /*Navbar*/
+  nav{
+    height: 10vw;
+  }
+
+  .navlogo{
+    width: 10vw;
+    height: 10vw;
+  }
+
+  nav h1 a{
+    font-size: 2.5vw;
+  }
+
+  nav a{
+    font-size: 1.35vw;
+  }
+
+  nav hr{
+    height: 5.5vw;
+  }
+
+  .fullBtn{
+    width: 8.5vw;
+    height: 3.5vw;
+    border-radius: 0.8vw;
+    font-size: 1.25vw;
+  }
+
+  .outlineBtn{
+    width: 8.5vw;
+    height: 3.5vw;
+    border-radius: 0.8vw;
+    border-width: 0.19vw;
+    font-size: 1.25vw;
+  }
+
+  .outlineBtn:hover{
+    font-size: 1.35vw;
+  }
+
+  .dropdowndetails h1{
+    font-size: 2.25vw;
+  }
+
+  .dropdowndetails p{
+    font-size: 1.5vw;
+  }
+
+  /*Login and Signup Page*/
+  .authcon{
+    margin-top: 10vw;
+    width: 60vw;
+    height: 45vw;
+  }
+
+  .authconlogin{
+    width: 55vw;
+    height: 30vw;
+  }
+
+  .authcon h1{
+    font-size: 2.25vw;
+  }
+
+  .authconlogin h1{
+    font-size: 2.2vw;
+  }
+
+  .authcon hr{
+    width: 10vw;
+    margin-top: 1vw;
+  }
+
+  .authcondiv{
+    height: 3vw;
+    margin-top: 2vw;
+  }
+
+  .authcondiv input{
+    width: 16vw;
+    height: 3vw;
+    font-size: 1.25vw;
+  }
+
+  .authconsideimg{
+    width: 1.8vw;
+    height: 1.8vw;
+  }
+
+  .authcondiv input:hover{
+    width: 18vw;
+  }
+
+  .authconright p{
+    font-size: 1.35vw;
+    margin-top: 0.5vw;
+  }
+
+  .authconoptions {
+    margin-top: 0vw;
+    padding: 0vw;
+    width: 5vw;
+    height: 4.5vw;
+  }
+
+  .authconoptions img{
+    width: 1.8vw;
+    height: 1.8vw;
+  }
+
+  .authconoptions:hover{
+    margin-top: -2vw;
+  }
+
+  .authteachers img{
+    width: 2.4vw;
+    height: 2.4vw;
+  }
+
+  .authconsubmit{
+    width: 22vw;
+    height: 3.5vw;
+    margin-bottom: 1vw;
+    font-size: 1.5vw;
+  }
 }
