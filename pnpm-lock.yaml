@@ -11,6 +11,9 @@ importers:
       '@biomejs/biome':
         specifier: ^1.7.3
         version: 1.7.3
+      bcrypt:
+        specifier: ^5.1.1
+        version: 5.1.1
       husky:
         specifier: ^9.0.11
         version: 9.0.11
