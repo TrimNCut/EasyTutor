@@ -5,11 +5,11 @@ export default function SignUp() {
   const [user, setUser] = useState(false);
 
   function uploadForm() {
-    let email = (document.getElementById('authsignupemail') as HTMLInputElement)?.value;
-    let username = (document.getElementById('authsignupusername') as HTMLInputElement)?.value;
-    let password1 = (document.getElementById('authsignuppasswordone') as HTMLInputElement)?.value;
-    let password2 = (document.getElementById('authsignuppasswordtwo') as HTMLInputElement)?.value;
-    let errtext = document.getElementsByClassName('authconerror')[0];
+    const email = (document.getElementById('authsignupemail') as HTMLInputElement)?.value;
+    const username = (document.getElementById('authsignupusername') as HTMLInputElement)?.value;
+    const password1 = (document.getElementById('authsignuppasswordone') as HTMLInputElement)?.value;
+    const password2 = (document.getElementById('authsignuppasswordtwo') as HTMLInputElement)?.value;
+    const errtext = document.getElementsByClassName('authconerror')[0];
 
     if (email.includes('@') === true && email.includes('.') === true) {
       if (username.length >= 5) {
@@ -90,7 +90,7 @@ export default function SignUp() {
             Sign Up
           </button>
         </div>
-        <p className='authconerror'></p>
+        <p className='authconerror' />
       </div>
     </div>
   );

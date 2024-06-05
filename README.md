@@ -37,9 +37,7 @@ In order to not waste your time implementing a change that has already been decl
   ```
 - Then you will need to create the backend env using the command
   ```bash
-  cd backend
-  cp -i ./env/.env.example ./env/.env.local
-  cd ..
+  copy .\backend\env\.env.example .\backend\env\.env.local
   ```
 
 ### Implement your changes
