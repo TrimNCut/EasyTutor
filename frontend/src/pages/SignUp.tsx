@@ -5,7 +5,7 @@ export default function SignUp() {
   const [user, setUser] = useState(false);
 
   function uploadForm() {
-    const email = (document.getElementById('authsignupusername') as HTMLInputElement)?.value;
+    const email = (document.getElementById('authsignupemail') as HTMLInputElement)?.value;
     const username = (document.getElementById('authsignupusername') as HTMLInputElement)?.value;
     const password1 = (document.getElementById('authsignuppasswordone') as HTMLInputElement)?.value;
     const password2 = (document.getElementById('authsignuppasswordtwo') as HTMLInputElement)?.value;
@@ -94,7 +94,7 @@ export default function SignUp() {
             Sign Up
           </button>
         </div>
-        <p className='authconerror'></p>
+        <p className='authconerror' />
       </div>
     </div>
   );
