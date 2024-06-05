@@ -35,10 +35,7 @@ In order to not waste your time implementing a change that has already been decl
   ```bash
   pnpm install
   ```
-- Then you will need to create the backend env using the command
-  ```bash
-  copy .\backend\env\.env.example .\backend\env\.env.local
-  ```
+- Then you will need to create the backend env by creating a .env.local file using the content in the .env.example file
 
 ### Implement your changes
 This project is a Turborepo monorepo. The code for the backend is in the backend directory, and the code for the frontend is in the frontend directory. Now you're all setup and can start implementing your changes.
