@@ -6,6 +6,8 @@ const envSchema = z.object({
   DATABASE_URL: z.string(),
   TOKEN_KEY: z.string(),
   TOKEN_EXPIRY: z.string(),
+  AUTH_EMAIL: z.string(),
+  AUTH_PASS: z.string(),
 });
 
 type Env = z.infer<typeof envSchema>;
@@ -22,6 +24,8 @@ function parseEnv(): Env {
     DATABASE_URL: 'mongodb+srv://test:test@cluster0.ns1yp.mongodb.net/myFirstDatabase',
     TOKEN_KEY: 'jaoijdoiklandkofnvaodoifoksidnsimfidinjfijdij',
     TOKEN_EXPIRY: '60d',
+    AUTH_EMAIL: 'email@hotmail.com',
+    AUTH_PASS: 'password',
   };
 }
 
