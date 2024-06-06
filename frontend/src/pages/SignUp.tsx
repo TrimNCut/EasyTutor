@@ -94,7 +94,7 @@ export default function SignUp() {
             Sign Up
           </button>
         </div>
-        <p className='authconerror'></p>
+        <p className='authconerror' />
       </div>
     </div>
   );
