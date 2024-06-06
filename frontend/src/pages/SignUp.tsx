@@ -2,7 +2,6 @@ import {useState} from 'react';
 
 export default function SignUp() {
   const [teacher, setTeacher] = useState(false);
-  const [user, setUser] = useState(false);
 
   function uploadForm() {
     const email = (document.getElementById('authsignupemail') as HTMLInputElement)?.value;
@@ -17,11 +16,7 @@ export default function SignUp() {
           if (password1.length >= 8) {
             if (password1.includes(' ') === false) {
               if (password1 === password2) {
-                if ((teacher === true && user === false) || (teacher === false && user === true)) {
-                  errtext.innerHTML = '';
-                } else {
-                  errtext.innerHTML = 'Choose an account type';
-                }
+                errtext.innerHTML = '';
               } else {
                 errtext.innerHTML = 'Passwords do not match';
               }
@@ -94,7 +89,6 @@ export default function SignUp() {
             Sign Up
           </button>
         </div>
-        <p className='authconerror' />
       </div>
     </div>
   );
