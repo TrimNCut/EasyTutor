@@ -15,3 +15,11 @@ model User {
   accountType String
   token       String @default("")
 }
+
+model Otp {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  email     String @unique
+  otp       String
+  createdAt Int
+  expiresAt Int
+}
