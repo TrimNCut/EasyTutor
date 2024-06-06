@@ -1,15 +1,13 @@
-import {prisma} from '../../config/db';
+import jwt from 'jsonwebtoken';
+import env from '../../config/env';
 import {createToken} from '../../utils/createToken';
 import {hashData, verifyHashedData} from '../../utils/hashData';
+import User from './model';
 
 export async function createNewUser(data: {username: string; email: string; password: string; accountType: string}) {
   const {username, email, password, accountType} = data;
 
-  const existingUser = await prisma.user.findFirst({
-    where: {
-      OR: [{email}, {username}],
-    },
-  });
+  const existingUser = await User.findOne({$or: [{email}, {username}]});
 
   if (existingUser) {
     if (existingUser.email === email) {
@@ -22,7 +20,13 @@ export async function createNewUser(data: {username: string; email: string; pass
 
   const hashedPassword = await hashData(password);
 
-  const createdUser = await prisma.user.create({data: {username, password: hashedPassword, email, accountType}});
+  const newUser = new User({
+    username,
+    email,
+    accountType,
+    password: hashedPassword,
+  });
+  const createdUser = await newUser.save();
 
   return createdUser;
 }
@@ -30,7 +34,7 @@ export async function createNewUser(data: {username: string; email: string; pass
 export async function authenticateUser(data: {email: string; password: string}) {
   const {email, password} = data;
 
-  let fetchedUser = await prisma.user.findFirst({where: {email}});
+  const fetchedUser = await User.findOne({email});
 
   if (!fetchedUser) {
     throw Error('Invalid credentials entered!');
@@ -48,7 +52,8 @@ export async function authenticateUser(data: {email: string; password: string}) 
 
   const token = createToken(tokenData);
 
-  fetchedUser = await prisma.user.update({where: {id: tokenData.userId}, data: {token: token}});
+  fetchedUser.token = token;
+  console.log(jwt.verify(token, env.TOKEN_KEY));
 
   return fetchedUser;
 }

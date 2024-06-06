@@ -1,9 +1,9 @@
 import type {Options} from 'nodemailer/lib/mailer';
-import {prisma} from '../../config/db';
 import env from '../../config/env';
 import {generateOTP} from '../../utils/generateOTP';
 import {hashData, verifyHashedData} from '../../utils/hashData';
 import {sendEmail} from '../../utils/sendEmails';
+import OTP from './model';
 
 interface SendOTP {
   email: string;
@@ -18,7 +18,7 @@ export async function sendOTP({email, duration = 1, message, subject}: SendOTP) 
   }
 
   // !Clear any old record
-  await prisma.otp.delete({where: {email}});
+  await OTP.deleteOne({email});
 
   // !Generate pin
   const generatedOTP = generateOTP();
@@ -35,11 +35,11 @@ export async function sendOTP({email, duration = 1, message, subject}: SendOTP) 
 
   // !Save otp record
   const hashedOTP = await hashData(generatedOTP);
-  const newOTP = prisma.otp.create({
-    data: {email, otp: hashedOTP, createdAt: Date.now(), expiresAt: Date.now() + 3600000 * +duration},
-  });
+  const newOTP = new OTP({email, otp: hashedOTP, createdAt: Date.now(), expiresAt: Date.now() + 3600000 * +duration});
 
-  return newOTP;
+  const createdOTPRecord = await newOTP.save();
+
+  return createdOTPRecord;
 }
 
 export async function verifyOTP({email, otp}: {email?: string; otp?: string}) {
@@ -48,7 +48,7 @@ export async function verifyOTP({email, otp}: {email?: string; otp?: string}) {
   }
 
   // !Ensure otp record exists
-  const matchedOTPRecord = await prisma.otp.findFirst({where: {email}});
+  const matchedOTPRecord = await OTP.findOne({email});
 
   if (!matchedOTPRecord) {
     throw Error('No otp records found.');
@@ -58,7 +58,7 @@ export async function verifyOTP({email, otp}: {email?: string; otp?: string}) {
 
   // !Checking for expired code
   if (expiresAt < Date.now()) {
-    await prisma.otp.delete({where: {email}});
+    await OTP.deleteOne({email});
     throw Error('Code has expired. Request for a new one.');
   }
 
@@ -70,5 +70,5 @@ export async function verifyOTP({email, otp}: {email?: string; otp?: string}) {
 }
 
 export async function deleteOTP(email: string) {
-  await prisma.otp.delete({where: {email}});
+  await OTP.deleteOne({email});
 }

@@ -1,5 +1,15 @@
-import {PrismaClient} from '@prisma/client';
+import mongoose from 'mongoose';
+import env from './env';
 
-export const prisma = new PrismaClient();
+const {MONGODB_DATABASE_URL} = env;
 
-console.log('Prisma set up');
+async function connectToDb() {
+  try {
+    await mongoose.connect(MONGODB_DATABASE_URL);
+    console.log('DB Connected');
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+connectToDb();

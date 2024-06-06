@@ -3,7 +3,7 @@ import {fromZodError} from 'zod-validation-error';
 
 const envSchema = z.object({
   PORT: z.string(),
-  DATABASE_URL: z.string(),
+  MONGODB_DATABASE_URL: z.string(),
   TOKEN_KEY: z.string(),
   TOKEN_EXPIRY: z.string(),
   AUTH_EMAIL: z.string(),
@@ -21,7 +21,7 @@ function parseEnv(): Env {
   console.log(fromZodError(env.error).message);
   return {
     PORT: '3001',
-    DATABASE_URL: 'mongodb+srv://test:test@cluster0.ns1yp.mongodb.net/myFirstDatabase',
+    MONGODB_DATABASE_URL: 'mongodb+srv://test:test@cluster0.ns1yp.mongodb.net/myFirstDatabase',
     TOKEN_KEY: 'jaoijdoiklandkofnvaodoifoksidnsimfidinjfijdij',
     TOKEN_EXPIRY: '60d',
     AUTH_EMAIL: 'email@hotmail.com',

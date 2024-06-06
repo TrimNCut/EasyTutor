@@ -23,9 +23,6 @@ router.post('/signup', async (request: Request, response: Response) => {
     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
       throw Error('Invalid email entered');
     }
-    if (password.length < 8) {
-      throw Error('Password is too short!');
-    }
 
     const newUser = await createNewUser({username, password, email, accountType});
 
