@@ -14,6 +14,7 @@ router.post('/', async (request: Request, response: Response) => {
       throw Error('Provide values for email, subject, message');
     }
 
+    // !Remove the leading and trailing white space and line terminator characters.
     email = String(email).trim();
     subject = String(subject).trim();
     message = String(message).trim();
@@ -32,7 +33,7 @@ router.post('/', async (request: Request, response: Response) => {
       return response.status(400).send(results.data.message);
     }
 
-    return response.send(String(error));
+    return response.status(400).send(String(error));
   }
 });
 
@@ -46,6 +47,7 @@ router.post('/verify', async (request: Request, response: Response) => {
       throw Error('Provide values for email and otp');
     }
 
+    // !Remove the leading and trailing white space and line terminator characters.
     email = String(email).trim();
     otp = String(otp).trim();
 
@@ -62,7 +64,7 @@ router.post('/verify', async (request: Request, response: Response) => {
       return response.status(400).send(results.data.message);
     }
 
-    return response.send(String(error));
+    return response.status(400).send(String(error));
   }
 });
 

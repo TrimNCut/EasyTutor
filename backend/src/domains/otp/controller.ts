@@ -9,7 +9,7 @@ interface SendOTP {
   email: string;
   subject: string;
   message: string;
-  duration: number;
+  duration?: number;
 }
 
 // !Send otp

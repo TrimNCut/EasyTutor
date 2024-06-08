@@ -1,13 +1,12 @@
 import express, {type Request, type Response} from 'express';
 import {z} from 'zod';
-import {sendVerificationOTPEmail, verifyUserEmail} from './controller';
+import {resetUserPassword, sendPasswordResetOTPEmail} from './controller';
 
 const router = express.Router();
 
-// !Request new verification otp
+// !Forgot password
 router.post('/', async (request: Request, response: Response) => {
   try {
-    // !Validate post form data
     let {email} = request.body;
 
     if (!email) {
@@ -17,9 +16,9 @@ router.post('/', async (request: Request, response: Response) => {
     // !Remove the leading and trailing white space and line terminator characters.
     email = String(email).trim();
 
-    const createdEmailVerificationOtP = await sendVerificationOTPEmail(email);
-
-    return response.status(200).json(createdEmailVerificationOtP);
+    // !Send password rest email
+    const createdPasswordResetOTP = await sendPasswordResetOTPEmail(email);
+    return response.status(200).json(createdPasswordResetOTP);
   } catch (error) {
     // !Error handling
     const errorSchema = z.object({message: z.string()});
@@ -34,23 +33,22 @@ router.post('/', async (request: Request, response: Response) => {
   }
 });
 
-// !Verify email verification otp
-router.post('/verify', async (request: Request, response: Response) => {
+router.post('/reset', async (request: Request, response: Response) => {
   try {
-    let {email, otp} = request.body;
+    let {email, otp, newPassword} = request.body;
 
-    if (!(email && otp)) {
-      throw 'Empty otp details are not allowed';
+    if (!(email && otp && newPassword)) {
+      throw Error('Empty credentials are not allowed');
     }
 
     // !Remove the leading and trailing white space and line terminator characters.
     email = String(email).trim();
     otp = String(otp).trim();
+    newPassword = String(newPassword).trim();
 
-    await verifyUserEmail({email, otp});
-
-    // !Verify user email
-    return response.status(200).json({email, verified: true});
+    // !Reset user password
+    await resetUserPassword({email, otp, newPassword});
+    return response.status(200).json({email, passwordreset: true});
   } catch (error) {
     // !Error handling
     const errorSchema = z.object({message: z.string()});
