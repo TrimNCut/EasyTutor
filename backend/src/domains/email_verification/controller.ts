@@ -31,6 +31,9 @@ export async function verifyUserEmail({email, otp}: {email: string; otp: string}
     throw Error('Invalid code passed. Check your inbox.');
   }
 
+  // !Update user record to show verified
+  await User.updateOne({email}, {verified: true});
+
   // !Delete otp
   await deleteOTP(email);
   return;

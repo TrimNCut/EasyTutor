@@ -45,6 +45,11 @@ export async function authenticateUser(data: {email: string; password: string}) 
     throw Error('Invalid credentials entered!');
   }
 
+  // !Check if email has been verified
+  if (!fetchedUser.verified) {
+    throw Error('Email has not been verified yet. Check your inbox.');
+  }
+
   // !Verify password
   const hashedPassword = fetchedUser.password;
 

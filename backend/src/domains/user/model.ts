@@ -7,6 +7,7 @@ const userSchema = new Schema({
   email: {type: String, unique: true, required: true},
   accountType: {type: String, required: true},
   token: String,
+  verified: {type: Boolean, default: false},
 });
 
 const User = mongoose.model('User', userSchema);

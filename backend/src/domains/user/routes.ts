@@ -1,6 +1,7 @@
 import express, {type Request, type Response} from 'express';
 import {z} from 'zod';
-import {authenticateUser, createNewUser} from './contoller';
+import {sendVerificationOTPEmail} from '../email_verification/controller';
+import {authenticateUser, createNewUser} from './controller';
 
 const router = express.Router();
 
@@ -30,6 +31,7 @@ router.post('/signup', async (request: Request, response: Response) => {
 
     // !Create new user
     const newUser = await createNewUser({username, password, email, accountType});
+    await sendVerificationOTPEmail(email);
 
     return response.status(200).json(newUser);
   } catch (error) {
