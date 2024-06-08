@@ -1,45 +1,42 @@
 import {useState} from 'react';
 
 export default function SignUp() {
-  const [teacher, setTeacher] = useState(false);
-  const [user, setUser] = useState(false);
+  const [_accountType, setAccountType] = useState<'user' | 'teacher'>('user');
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password1, setPassword1] = useState('');
+  const [password2, setPassword2] = useState('');
+  const [errorText, setErrorText] = useState('');
 
   function uploadForm() {
-    const email = (document.getElementById('authsignupemail') as HTMLInputElement)?.value;
-    const username = (document.getElementById('authsignupusername') as HTMLInputElement)?.value;
-    const password1 = (document.getElementById('authsignuppasswordone') as HTMLInputElement)?.value;
-    const password2 = (document.getElementById('authsignuppasswordtwo') as HTMLInputElement)?.value;
-    const errtext = document.getElementsByClassName('authconerror')[0];
-
-    if (email.includes('@') === true && email.includes('.') === true) {
-      if (username.length >= 5) {
-        if (username.includes(' ') === false) {
-          if (password1.length >= 8) {
-            if (password1.includes(' ') === false) {
-              if (password1 === password2) {
-                if ((user === true && teacher === false) || (user === false && teacher === true)) {
-                  errtext.innerHTML = '';
-                } else {
-                  errtext.innerHTML = 'Choose an account type';
-                }
-              } else {
-                errtext.innerHTML = 'Passwords do not match';
-              }
-            } else {
-              errtext.innerHTML = 'Password cannot contain space(s)';
-            }
-          } else {
-            errtext.innerHTML = 'Password must be 8 characters or longer';
-          }
-        } else {
-          errtext.innerHTML = 'Username cannot contain space(s)';
-        }
-      } else {
-        errtext.innerHTML = 'Username must be 5 characters or longer';
-      }
-    } else {
-      errtext.innerHTML = 'Invalid Email Address';
+    if (!(username !== '' && email !== '' && password1 !== '' && password2 !== '')) {
+      setErrorText('Input fields must not be empty!');
+      return;
     }
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      setErrorText('Invalid Email Address');
+      return;
+    }
+    if (username.length < 5) {
+      setErrorText('Username must be 5 characters or longer');
+      return;
+    }
+    if (!/^[a-zA-Z ]*$/.test(username)) {
+      setErrorText('Invalid username entered');
+      return;
+    }
+
+    if (password1.length < 8) {
+      setErrorText('Password must be 8 characters or longer');
+      return;
+    }
+
+    if (password1 !== password2) {
+      setErrorText('Passwords do not match');
+      return;
+    }
+
+    setErrorText('');
   }
 
   return (
@@ -51,20 +48,35 @@ export default function SignUp() {
         <h1>Sign Up Today!</h1>
         <hr />
         <div className='authcondiv'>
-          <img src='/envelope-solid.svg' alt='envelopeicon' className='authconsideimg' />
-          <input type='email' placeholder='Your Mail' id='authsignupemail' />
+          <img src='/envelope-solid.svg' alt='envelope icon' className='authconsideimg' />
+          <input type='email' placeholder='Your Mail' value={email} onChange={({target}) => setEmail(target.value)} />
         </div>
         <div className='authcondiv'>
           <img src='/user-solid-dark.svg' alt='usericon' className='authconsideimg' />
-          <input type='text' placeholder='Username' id='authsignupusername' />
+          <input
+            type='text'
+            placeholder='Username'
+            value={username}
+            onChange={({target}) => setUsername(target.value)}
+          />
         </div>
         <div className='authcondiv'>
           <img src='/key-solid.svg' alt='usericon' className='authconsideimg' />
-          <input type='password' placeholder='Password' id='authsignuppasswordone' />
+          <input
+            type='password'
+            placeholder='Password'
+            value={password1}
+            onChange={({target}) => setPassword1(target.value)}
+          />
         </div>
         <div className='authcondiv'>
           <img src='/key-solid.svg' alt='usericon' className='authconsideimg' />
-          <input type='password' placeholder='Confirm Password' id='authsignuppasswordtwo' />
+          <input
+            type='password'
+            placeholder='Confirm Password'
+            value={password2}
+            onChange={({target}) => setPassword2(target.value)}
+          />
         </div>
         <p>Register as:</p>
         <div className='authcondiv'>
@@ -72,8 +84,7 @@ export default function SignUp() {
             className='authconoptions authparents'
             type='button'
             onClick={() => {
-              setUser(true);
-              teacher ? setTeacher(false) : setTeacher(false);
+              setAccountType('user');
             }}
           >
             <img src='/user-solid.svg' alt='For Parents' />
@@ -82,8 +93,7 @@ export default function SignUp() {
             className='authconoptions authteachers'
             type='button'
             onClick={() => {
-              setTeacher(true);
-              user ? setUser(false) : setUser(false);
+              setAccountType('teacher');
             }}
           >
             <img src='/chalkboard-user-solid.svg' alt='For Parents' />
@@ -94,7 +104,7 @@ export default function SignUp() {
             Sign Up
           </button>
         </div>
-        <p className='authconerror' />
+        <p className='authconerror'>{errorText}</p>
       </div>
     </div>
   );

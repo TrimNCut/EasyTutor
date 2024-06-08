@@ -21,14 +21,6 @@ router.post('/signup', async (request: Request, response: Response) => {
     password = String(password).trim();
     accountType = String(accountType).trim();
 
-    // !Make sure the username and email are valid
-    if (!/^[a-zA-Z ]*$/.test(username)) {
-      throw Error('Invalid username entered');
-    }
-    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-      throw Error('Invalid email entered');
-    }
-
     // !Create new user
     const newUser = await createNewUser({username, password, email, accountType});
     await sendVerificationOTPEmail(email);
