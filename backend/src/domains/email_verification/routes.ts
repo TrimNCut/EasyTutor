@@ -1,27 +1,24 @@
 import express, {type Request, type Response} from 'express';
 import {z} from 'zod';
-import {sendOTP, verifyOTP} from './controller';
+import {sendVerificationOTPEmail, verifyUserEmail} from './controller';
 
 const router = express.Router();
 
 // !Request new verification otp
 router.post('/', async (request: Request, response: Response) => {
   try {
-    // !Validate form data input
-    let {email, subject, message, duration} = request.body;
+    // !Validate post form data
+    let {email} = request.body;
 
-    if (!(email && subject && message)) {
-      throw Error('Provide values for email, subject, message');
+    if (!email) {
+      throw Error('An email is required');
     }
 
     email = String(email).trim();
-    subject = String(subject).trim();
-    message = String(message).trim();
 
-    // !Send otp
-    const createdOTP = await sendOTP({email, message, subject, duration});
+    const createdEmailVerificationOtP = await sendVerificationOTPEmail(email);
 
-    return response.status(200).json(createdOTP);
+    return response.status(200).json(createdEmailVerificationOtP);
   } catch (error) {
     // !Error handling
     const errorSchema = z.object({message: z.string()});
@@ -36,22 +33,22 @@ router.post('/', async (request: Request, response: Response) => {
   }
 });
 
-// !Verify otp
+// !Verify email verification otp
 router.post('/verify', async (request: Request, response: Response) => {
   try {
-    // !Validate form data input
     let {email, otp} = request.body;
 
     if (!(email && otp)) {
-      throw Error('Provide values for email and otp');
+      throw 'Empty otp details are not allowed';
     }
 
     email = String(email).trim();
     otp = String(otp).trim();
 
-    // !Validate otp
-    const validOTP = await verifyOTP({email, otp});
-    return response.status(200).json({valid: validOTP});
+    await verifyUserEmail({email, otp});
+
+    // !Verify user email
+    return response.status(200).json({email, verified: true});
   } catch (error) {
     // !Error handling
     const errorSchema = z.object({message: z.string()});

@@ -4,19 +4,23 @@ import {authenticateUser, createNewUser} from './contoller';
 
 const router = express.Router();
 
+// !Sign up
 router.post('/signup', async (request: Request, response: Response) => {
   try {
     let {username, email, password, accountType} = request.body;
 
+    // !Check if any input field is empty
     if (!(username && email && password && accountType)) {
-      throw Error('Empty input fields!');
+      throw Error('Empty input fields! username, email, account and password must be filled!');
     }
 
-    username = username.trim();
-    email = email.trim();
-    password = password.trim();
-    accountType = accountType.trim();
+    // !Remove the leading and trailing white space and line terminator characters.
+    username = String(username).trim();
+    email = String(email).trim();
+    password = String(password).trim();
+    accountType = String(accountType).trim();
 
+    // !Make sure the username and email are valid
     if (!/^[a-zA-Z ]*$/.test(username)) {
       throw Error('Invalid username entered');
     }
@@ -24,10 +28,12 @@ router.post('/signup', async (request: Request, response: Response) => {
       throw Error('Invalid email entered');
     }
 
+    // !Create new user
     const newUser = await createNewUser({username, password, email, accountType});
 
     return response.status(200).json(newUser);
   } catch (error) {
+    // !Error handling
     const errorSchema = z.object({message: z.string()});
 
     const results = errorSchema.safeParse(error);
@@ -36,25 +42,30 @@ router.post('/signup', async (request: Request, response: Response) => {
       return response.status(400).send(results.data.message);
     }
 
-    return response.send(String(error));
+    return response.status(400).send(String(error));
   }
 });
 
+// !Login
 router.post('/login', async (request: Request, response: Response) => {
   try {
     let {email, password} = request.body;
 
+    // !Check if any input field is empty
     if (!(email && password)) {
       throw Error('Empty credentials supplied!');
     }
 
-    email = email.trim();
-    password = password.trim();
+    // !Remove the leading and trailing white space and line terminator characters.
+    email = String(email).trim();
+    password = String(password).trim();
 
+    // !Authenticate user
     const authenticatedUser = await authenticateUser({email, password});
 
     return response.status(200).json(authenticatedUser);
   } catch (error) {
+    // !Error handling
     const errorSchema = z.object({message: z.string()});
 
     const results = errorSchema.safeParse(error);
@@ -63,7 +74,7 @@ router.post('/login', async (request: Request, response: Response) => {
       return response.status(400).send(results.data.message);
     }
 
-    return response.send(String(error));
+    return response.status(400).send(String(error));
   }
 });
 

@@ -1,12 +1,12 @@
-import jwt from 'jsonwebtoken';
-import env from '../../config/env';
 import {createToken} from '../../utils/createToken';
 import {hashData, verifyHashedData} from '../../utils/hashData';
 import User from './model';
 
+// !Create new user
 export async function createNewUser(data: {username: string; email: string; password: string; accountType: string}) {
   const {username, email, password, accountType} = data;
 
+  // !Check if user exists
   const existingUser = await User.findOne({$or: [{email}, {username}]});
 
   if (existingUser) {
@@ -18,8 +18,10 @@ export async function createNewUser(data: {username: string; email: string; pass
     }
   }
 
+  // !Hash the password
   const hashedPassword = await hashData(password);
 
+  // !Create the user
   const newUser = new User({
     username,
     email,
@@ -31,15 +33,19 @@ export async function createNewUser(data: {username: string; email: string; pass
   return createdUser;
 }
 
+// !Authenticate user
 export async function authenticateUser(data: {email: string; password: string}) {
   const {email, password} = data;
 
+  // !Get user from database
   const fetchedUser = await User.findOne({email});
 
+  // !Check if user does not exist
   if (!fetchedUser) {
     throw Error('Invalid credentials entered!');
   }
 
+  // !Verify password
   const hashedPassword = fetchedUser.password;
 
   const passwordMatch = await verifyHashedData(password, hashedPassword);
@@ -48,12 +54,12 @@ export async function authenticateUser(data: {email: string; password: string}) 
     throw Error('Invalid password entered!');
   }
 
+  // !Generate JWT token
   const tokenData = {userId: fetchedUser.id, email};
 
   const token = createToken(tokenData);
 
   fetchedUser.token = token;
-  console.log(jwt.verify(token, env.TOKEN_KEY));
 
   return fetchedUser;
 }

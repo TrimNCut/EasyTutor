@@ -1,5 +1,6 @@
 import mongoose, {Schema} from 'mongoose';
 
+// !OTP schema
 const OTPSchema = new Schema({
   email: {type: String, unique: true, required: true},
   otp: {type: String, required: true},

@@ -9,14 +9,11 @@ interface SendOTP {
   email: string;
   subject: string;
   message: string;
-  duration?: number;
+  duration: number;
 }
 
+// !Send otp
 export async function sendOTP({email, duration = 1, message, subject}: SendOTP) {
-  if (!(email && subject && message)) {
-    throw Error('Provide values for email, subject, message');
-  }
-
   // !Clear any old record
   await OTP.deleteOne({email});
 
@@ -28,7 +25,7 @@ export async function sendOTP({email, duration = 1, message, subject}: SendOTP) 
     from: env.AUTH_EMAIL,
     to: email,
     subject,
-    html: `<p>${message}</p><p style="color:tomato;font-size:25px;letter-spacing:2px;"><b>${generatedOTP}</b></p><p>This code <b>expires in $duration hours</b>.</p>`,
+    html: `<p>${message}</p><p style="color:tomato;font-size:25px;letter-spacing:2px;"><b>${generatedOTP}</b></p><p>This code <b>expires in ${duration} hours</b>.</p>`,
   };
 
   await sendEmail(mailOptions);
@@ -42,11 +39,7 @@ export async function sendOTP({email, duration = 1, message, subject}: SendOTP) 
   return createdOTPRecord;
 }
 
-export async function verifyOTP({email, otp}: {email?: string; otp?: string}) {
-  if (!(email && otp)) {
-    throw Error('Provide values for email and otp');
-  }
-
+export async function verifyOTP({email, otp}: {email: string; otp: string}) {
   // !Ensure otp record exists
   const matchedOTPRecord = await OTP.findOne({email});
 
@@ -69,6 +62,7 @@ export async function verifyOTP({email, otp}: {email?: string; otp?: string}) {
   return validOTP;
 }
 
+// !Delete otp
 export async function deleteOTP(email: string) {
   await OTP.deleteOne({email});
 }
