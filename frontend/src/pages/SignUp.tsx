@@ -17,7 +17,7 @@ export default function SignUp() {
       setErrorText('Invalid Email Address');
       return;
     }
-    if (username.length <= 5) {
+    if (username.length < 5) {
       setErrorText('Username must be 5 characters or longer');
       return;
     }
@@ -26,7 +26,7 @@ export default function SignUp() {
       return;
     }
 
-    if (password1.length <= 8) {
+    if (password1.length < 8) {
       setErrorText('Password must be 8 characters or longer');
       return;
     }
